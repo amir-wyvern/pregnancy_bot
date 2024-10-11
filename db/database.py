@@ -1,11 +1,9 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker
-import os
+from configs.settings import settings
 
-SQLITE_ADDRESS = os.getenv('SQLITE_ADDRESS')
-
-SQLALCHEMY_DATABASE_URL = f"sqlite://{SQLITE_ADDRESS}"
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{settings.SQLITE_ADDRESS}"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 Base = declarative_base()

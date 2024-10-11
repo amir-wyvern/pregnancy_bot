@@ -16,17 +16,15 @@ class DbUser(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    pregnancies = relationship("DbPregnancy", back_populates="user")
-    diseases = relationship("DbDisease", back_populates="user")
-
-
     phone_number = Column(String(50), index=True, unique=True, nullable=False)
-
     name = Column(String(50), index=True, nullable=False)
     last_name = Column(String(50), index=True, nullable=False)
     birth_date = Column(DateTime, nullable=False)
     tel_id = Column(Integer, nullable=True, unique=True) 
     status = Column(Boolean, nullable=False)
+
+    pregnancies_rel = relationship("DbPregnancy", back_populates="user_rel")
+    diseases_rel = relationship("DbDisease", back_populates="user_rel")
 
 
 class DbPregnancy(Base):
@@ -41,7 +39,7 @@ class DbPregnancy(Base):
     weight_before = Column(Float, nullable=True)
     weight_current = Column(Float, nullable=True)
 
-    user = relationship("DbUser", back_populates="pregnancy")
+    user_rel = relationship("DbUser", back_populates="pregnancies_rel")
 
 
 class DbDisease(Base):
@@ -55,7 +53,7 @@ class DbDisease(Base):
     start_end = Column(DateTime, nullable=True)
     discription = Column(String(500), nullable= True)
 
-    diseases = relationship("DbUser", back_populates="diseases")
+    user_rel = relationship("DbUser", back_populates="diseases_rel")
 
 
 class DbAdmin(Base):

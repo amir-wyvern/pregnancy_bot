@@ -31,6 +31,11 @@ def get_admin_by_admin_id(admin_id, db:Session) -> DbAdmin:
     return db.query(DbAdmin).filter(DbAdmin.id == admin_id ).first()
 
 
+def get_admin_by_tel_id(tel_id, db:Session) -> DbAdmin:
+    
+    return db.query(DbAdmin).filter(DbAdmin.tel_id == tel_id ).first()
+
+
 def get_admin_by_username(username, db:Session) -> DbAdmin:
     
     return db.query(DbAdmin).filter(DbAdmin.username == username ).first()
@@ -54,6 +59,7 @@ def update_status_by_username(username, new_status: bool, db:Session ,commit= Tr
         db.commit()
             
     return True 
+
 
 def delete_admin_by_username(username, db:Session):
 
